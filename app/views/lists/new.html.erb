@@ -1,0 +1,37 @@
+<div class="header-actions">
+  <h1>Create a New List</h1>
+  <%= link_to "Back", lists_path, class: "btn-header" %>
+</div>
+
+<%= form_with(model: @list) do |f| %>
+  <% if @list.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+      <ul>
+        <% @list.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, "List Name" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Enter a name for your list" %>
+  </div>
+
+  <h2>Select Movies</h2>
+  <div class="cards small-cards">
+    <% Movie.all.each do |movie| %>
+      <label class="card-trip">
+        <%= check_box_tag "list[movie_ids][]", movie.id, @list.movie_ids.include?(movie.id), class: "movie-checkbox" %>
+        <%= image_tag movie.poster_url, alt: movie.title, class: "card-trip-img" %>
+        <div class="card-trip-infos">
+          <h2 style="font-size:14px;"><%= movie.title %></h2>
+        </div>
+      </label>
+    <% end %>
+  </div>
+
+  <%= f.submit "Create List", class: "btn-header" %>
+<% end %>

@@ -1,0 +1,18 @@
+<h1>All Lists</h1>
+
+<%= link_to "New List", new_list_path, class: "btn-header" %>
+
+<div class="cards">
+  <% @lists.each do |list| %>
+    <div class="card-category" style="background-image: url('<%= asset_path('list-background.jpg') %>')">
+      <%= link_to list.name, list_path(list), class: "card-link" %>
+
+      <div class="card-actions">
+        <%= link_to "Delete", list_path(list),
+              method: :delete,
+              data: { confirm: "Are you sure?", turbo: false },
+              class: "btn-header" %>
+      </div>
+    </div>
+  <% end %>
+</div>

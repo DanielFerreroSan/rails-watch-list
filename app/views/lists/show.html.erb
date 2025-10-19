@@ -1,0 +1,38 @@
+<h1><%= @list.name %></h1>
+
+<div class="actions">
+  <%= link_to "Back to Lists", lists_path, class: "btn-header" %>
+  <%= link_to "Add Bookmark", new_list_bookmark_path(@list), class: "btn-header" %>
+</div>
+
+<h2>Movies in this List</h2>
+
+<% if @list.movies.any? %>
+  <div class="cards small-cards">
+    <% @list.movies.each do |movie| %>
+      <% if (bookmark = movie.bookmarks.find_by(list: @list)) %>
+        <div class="card-trip">
+          <%= image_tag movie.poster_url, alt: movie.title, class: "card-trip-img" %>
+
+          <div class="card-trip-infos">
+            <h2><%= movie.title %></h2>
+            <p><%= truncate(movie.overview, length: 60) %></p>
+            <% if bookmark.comment.present? %>
+              <p class="bookmark-comment"><em>“<%= bookmark.comment %>”</em></p>
+            <% end %>
+
+            <div class="bookmark-actions">
+              <%= link_to "✖",
+                  list_bookmark_path(@list, bookmark),
+                  method: :delete,
+                  data: { confirm: "Are you sure you want to remove this movie from the list?" },
+                  class: "btn-delete" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <p>No movies in this list yet.</p>
+<% end %>

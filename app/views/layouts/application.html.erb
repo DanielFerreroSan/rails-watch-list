@@ -11,6 +11,20 @@
   </head>
 
   <body>
+    <header style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background-color:#222; color:white;">
+      <!-- Logo a la izquierda -->
+      <div style="display:flex; align-items:center;">
+        <!-- Podés usar un icono de Font Awesome o Emoji -->
+        <span style="font-size:24px; margin-right:10px;">🎬</span>
+        <span style="font-weight:bold; font-size:20px;">MyMoviesApp</span>
+      </div>
+
+      <!-- Botones a la derecha -->
+      <div>
+        <%= link_to "My Lists", lists_path, class: "btn-header" %>
+        <%= link_to "New List", new_list_path, class: "btn-header" %>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>

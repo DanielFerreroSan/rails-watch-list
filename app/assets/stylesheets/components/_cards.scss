@@ -1,0 +1,120 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cards.small-cards {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.card-category {
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .btn-header {
+    margin-top: 8px;
+    font-size: 14px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+  }
+}
+
+.card-trip {
+  cursor: pointer;
+  overflow: hidden;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-trip-img {
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
+    transition: border 0.2s ease, opacity 0.2s ease;
+  }
+
+  .card-trip-infos {
+    padding: 10px;
+
+    h2 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .movie-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  input[type="checkbox"]:checked + .card-trip-img,
+  input[type="radio"]:checked + .card-trip-img {
+    border: 3px solid #f39c12;
+    opacity: 0.8;
+  }
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.btn-delete:hover {
+  color: #ff0000;
+}

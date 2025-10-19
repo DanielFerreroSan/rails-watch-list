@@ -1,0 +1,38 @@
+<h1>Add a Movie to "<%= @list.name %>"</h1>
+
+<%= form_with(model: [@list, @bookmark]) do |f| %>
+  <% if @bookmark.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+      <ul>
+        <% @bookmark.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2>Select Movie</h2>
+  <div class="cards small-cards">
+    <% (Movie.all - @list.movies).sort_by(&:title).each do |movie| %>
+      <label class="card-trip">
+        <%= f.radio_button :movie_id, movie.id, style: "position:absolute; opacity:0; height:0; width:0;" %>
+
+        <%= image_tag movie.poster_url, alt: movie.title, class: "card-trip-img" %>
+
+        <div class="card-trip-infos">
+          <h2 style="font-size:14px;"><%= movie.title %></h2>
+        </div>
+      </label>
+    <% end %>
+  </div>
+
+  <div class="form-group" style="margin-top: 16px;">
+    <%= f.label :comment, "Comment" %>
+    <%= f.text_field :comment, class: "form-control", placeholder: "Write a comment (min 6 characters)" %>
+  </div>
+
+  <%= f.submit "Add to List", class: "btn-header" %>
+<% end %>
+
+<%= link_to "Back to List", list_path(@list), class: "btn-header" %>
